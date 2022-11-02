@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('factura_id')->constrained('facturas');
             $table->foreignId('zapato_id')->constrained('zapatos');
             $table->integer('cantidad');
+            $table->string('estado')->default('pendiente');
             $table->timestamps();
         });
     }

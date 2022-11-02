@@ -58,7 +58,12 @@ class LineaController extends Controller
      */
     public function edit(Linea $linea)
     {
-        //
+        $validado = request()->validate([
+            'estado' => 'required|string',
+        ]);
+        $linea->estado = $validado['estado'];
+        $linea->update();
+        return redirect('/todosLosPedidos')->with('success', 'Estado cambiado');
     }
 
     /**

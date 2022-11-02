@@ -29,7 +29,11 @@ class ZapatoController extends Controller
      */
     public function create()
     {
-        //
+        $producto = new Zapato();
+
+        return view('productos.create', [
+            'producto' => $producto,
+        ]);
     }
 
     /**
@@ -40,7 +44,14 @@ class ZapatoController extends Controller
      */
     public function store(StoreZapatoRequest $request)
     {
-        //
+        $validados = $this->validar();
+
+        $producto = new Zapato();
+        $producto->nombre = $validados['nombre'];
+        $producto->save();
+
+        return redirect('/productos')
+            ->with('success', 'Producto insertado con éxito.');
     }
 
     /**

@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\FacturaController;
-use App\Http\Controllers\PedidoController;
+use App\Http\Controllers\LineaController;
 use App\Http\Controllers\ZapatoController;
+use App\Http\Controllers\PedidoAdminController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,7 +31,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('carritos', CarritoController::class);
 
-    Route::resource('productos', ZapatoController::class);
+
+
+    Route::get('/productos/index', [ZapatoController::class, 'index']);
 
     Route::resource('facturas', FacturaController::class);
 
@@ -48,8 +52,22 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/carritos/vaciar', [CarritoController::class, 'vaciar'])
         ->name('vaciar');
 
-    Route::post('/carritos/factura', [CarritoController::class, 'pedido'])
+    Route::post('/pedidoEstado/{linea}', [LineaController::class, 'edit'])
+        ->name('edit');
+
+        Route::post('/carritos/factura', [CarritoController::class, 'pedido'])
         ->name('pedido');
+
+    /* Route::resource('todosLosPedidos', PedidoAdminController::class)
+        ->middleware(['auth', 'can:solo-admin']); */
+});
+
+Route::middleware(['auth', 'can:solo-admin'])->group(function () {
+
+    Route::resource('todosLosPedidos', PedidoAdminController::class);
+    Route::resource('productos', ZapatoController::class);
+
+
 });
 
 require __DIR__.'/auth.php';

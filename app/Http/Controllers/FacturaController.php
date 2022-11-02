@@ -21,7 +21,6 @@ class FacturaController extends Controller
             'facturas' => $facturas
         ]);
     }
-
     /**
      * Show the form for creating a new resource.
      *

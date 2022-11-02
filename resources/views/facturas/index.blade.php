@@ -24,6 +24,9 @@
                                 <th class="px-6 py-2 text-gray-500">
                                     Precio
                                 </th>
+                                <th class="px-6 py-2 text-gray-500">
+                                    Estado
+                                </th>
                             </thead>
                             <tbody>
                                 @foreach ($facturas as $factura)
@@ -34,6 +37,7 @@
                                     <td class="px-6 py-2">{{ $linea->zapato->nombre }}</td>
                                     <td class="px-6 py-2">{{ $linea->cantidad }}</td>
                                     <td class="px-6 py-2">{{ $linea->zapato->precio * $linea->cantidad }}$</td>
+                                    <td class="px-6 py-2">{{ $linea->estado }}</td>
                                         <td>
                                             <div class="text-sm text-gray-900 ">
                                                 {{-- <form action="{{ route('anadiralcarrito', $zapato) }}" method="POST">

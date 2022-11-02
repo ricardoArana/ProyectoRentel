@@ -24,6 +24,12 @@
                     <x-nav-link :href="route('facturas.index')" :active="request()->routeIs('facturas.index')">
                         {{ __('Mis pedidos') }}
                     </x-nav-link>
+                    @if (Auth::user()->rol == "admin")
+
+                    <x-nav-link :href="route('todosLosPedidos.index')" :active="request()->routeIs('todosLosPedidos.index')">
+                        {{ __('Todos los pedidos') }}
+                    </x-nav-link>
+                    @endif
                 </div>
             </div>
 
