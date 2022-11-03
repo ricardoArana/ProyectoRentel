@@ -31,7 +31,7 @@
                     </x-nav-link>
 
                     <x-nav-link :href="route('completados')" :active="request()->routeIs('completados')">
-                        {{ __('Pedidos Putaompletados') }}
+                        {{ __('Pedidos Completados') }}
                     </x-nav-link>
                     @endif
                 </div>
