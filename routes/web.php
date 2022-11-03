@@ -65,6 +65,7 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth', 'can:solo-admin'])->group(function () {
 
     Route::resource('todosLosPedidos', PedidoAdminController::class);
+
     Route::resource('productos', ZapatoController::class);
 
 

@@ -44,10 +44,23 @@ class ZapatoController extends Controller
      */
     public function store(StoreZapatoRequest $request)
     {
-        $validados = $this->validar();
+        $validados = $request->validated();
 
         $producto = new Zapato();
         $producto->nombre = $validados['nombre'];
+
+        $image = $request->file('imagen');
+            /* Movemos a la carpeta deseada */
+            $image->move(public_path('img'), $image->getClientOriginalName());
+
+            /* $image->move('img', $image->getClientOriginalName()); */
+            /* Lo guardamos en la base de datos como string */
+            $producto->imagen = "img/" . $image->getClientOriginalName();
+
+
+        $producto->descripcion = $validados['descripcion'];
+        $producto->precio = $validados['precio'];
+
         $producto->save();
 
         return redirect('/productos')

@@ -13,7 +13,7 @@ class StoreZapatoRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class StoreZapatoRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nombre'=> 'required|string|max:255',
+            'imagen'=> 'required|image',
+            'descripcion'=> 'required',
+            'precio'=> 'required',
         ];
     }
 }

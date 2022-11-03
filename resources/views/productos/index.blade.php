@@ -28,7 +28,10 @@
                                             </div>
                                         </td>
                                     </tr>
+
                                 @endforeach
+                                <a href="/productos/create" class="mt-4 text-blue-900 hover:underline">Insertar un nuevo producto</a>
+
                             </tbody>
                         </table>
                     </x-plantilla>
