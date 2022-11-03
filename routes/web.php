@@ -64,15 +64,16 @@ Route::middleware(['auth'])->group(function () {
 
 Route::middleware(['auth', 'can:solo-admin'])->group(function () {
 
-    Route::resource('todosLosPedidos', PedidoAdminController::class);
+    Route::get('/todosLosPedidos', [PedidoAdminController::class, 'index'])->name('todosLosPedidos');
+    Route::get('/completados', [PedidoAdminController::class, 'completados'])->name('completados');
 
     Route::get('/productos/index', [ProductoController::class, 'edit']);
-    Route::get('/productos/create', [ProductosController::class, 'create']);
-    Route::post('/productos', [ProductosController::class, 'store'])
+    Route::get('/productos/create', [ProductoController::class, 'create']);
+    Route::post('/productos', [ProductoController::class, 'store'])
         ->name('productos.store');
-    Route::get('/productos/{id}/edit', [ProductosController::class, 'edit']);
-    Route::delete('/productos/{id}', [ProductosController::class, 'destroy']);
-    Route::put('/productos/{id}', [ProductosController::class, 'update'])
+    Route::get('/productos/{id}/edit', [ProductoController::class, 'edit']);
+    Route::delete('/productos/{id}', [ProductoController::class, 'destroy']);
+    Route::put('/productos/{id}', [ProductoController::class, 'update'])
         ->name('productos.update');
 
 

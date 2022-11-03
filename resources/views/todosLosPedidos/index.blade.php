@@ -31,21 +31,25 @@
                             <tbody>
                                 @foreach ($facturas as $factura)
                                 @foreach ($factura->lineas as $linea)
+                                @if ($linea->estado == 'Completado')
 
-                                <tr>
-                                    <td class="px-6 py-2"><img class="h-44 w-full" src="{{ URL($linea->producto->imagen) }}" alt="imagen del producto"></td>
-                                    <td class="px-6 py-2">{{ $linea->producto->nombre }}</td>
-                                    <td class="px-6 py-2">{{ $linea->cantidad }}</td>
-                                    <td class="px-6 py-2">{{ $linea->producto->precio * $linea->cantidad }}$</td>
-                                    <td class="px-6 py-2">{{ $linea->estado }}</td>
+
+                                    @else
+                                    <tr>
+                                        <td class="px-6 py-2"><img class="h-44 w-full" src="{{ URL($linea->producto->imagen) }}" alt="imagen del producto"></td>
+                                        <td class="px-6 py-2">{{ $linea->producto->nombre }}</td>
+                                        <td class="px-6 py-2">{{ $linea->cantidad }}</td>
+                                        <td class="px-6 py-2">{{ $linea->producto->precio * $linea->cantidad }}$</td>
+                                        <td class="px-6 py-2">{{ $linea->estado }}</td>
                                         <td>
                                             <div class="text-sm text-gray-900 ">
                                                 <form action="{{ route('edit', $linea) }}" method="POST">
                                                     @csrf
                                                     @method('POST')
                                                     <select name="estado" id="estado">
-                                                        <option  value="pendiente">Pendiente</option>
-                                                        <option value="en camino">En camino</option>
+                                                        <option  value="Pendiente">Pendiente</option>
+                                                        <option value="Enviado">Enviado</option>
+                                                        <option value="Completado">Completado</option>
 
                                                         <input type="submit" class="px-4 py-1 text-sm text-white bg-red-400 rounded" value="Cambiar estado">
                                                     </select>
@@ -53,8 +57,9 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    @endforeach
-                                    @endforeach
+                                    @endif
+                                @endforeach
+                                @endforeach
                                 </tbody>
                             </table>
                         </x-plantilla>

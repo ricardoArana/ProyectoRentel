@@ -26,8 +26,12 @@
                     </x-nav-link>
                     @if (Auth::user()->rol == "admin")
 
-                    <x-nav-link :href="route('todosLosPedidos.index')" :active="request()->routeIs('todosLosPedidos.index')">
+                    <x-nav-link :href="route('todosLosPedidos')" :active="request()->routeIs('todosLosPedidos')">
                         {{ __('Todos los pedidos') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('completados')" :active="request()->routeIs('completados')">
+                        {{ __('Pedidos Putaompletados') }}
                     </x-nav-link>
                     @endif
                 </div>

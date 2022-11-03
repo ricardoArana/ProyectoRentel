@@ -15,4 +15,12 @@ class PedidoAdminController extends Controller
         ]);
 
     }
+
+    public function completados(){
+        $facturas = Factura::all();
+        return view('completados', [
+            'facturas' => $facturas
+        ]);
+
+    }
 }
