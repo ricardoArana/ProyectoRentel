@@ -18,7 +18,7 @@
                     <x-nav-link :href="route('carritos.index')" :active="request()->routeIs('carritos.index')">
                         {{ __('Ver carrito') }} ({{ Auth::user()->carritos()->sum('cantidad') }})
                     </x-nav-link>
-                    <x-nav-link :href="route('productos.index')" :active="request()->routeIs('productos.index')">
+                    <x-nav-link :href="route('productos')" :active="request()->routeIs('productos')">
                         {{ __('Productos') }}
                     </x-nav-link>
                     <x-nav-link :href="route('facturas.index')" :active="request()->routeIs('facturas.index')">

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreZapatoRequest;
-use App\Http\Requests\UpdateZapatoRequest;
-use App\Models\Zapato;
+use App\Http\Requests\StoreProductoRequest;
+use App\Http\Requests\UpdateProductoRequest;
+use App\Models\Producto;
 
-class ZapatoController extends Controller
+class ProductoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +15,10 @@ class ZapatoController extends Controller
      */
     public function index()
     {
-        $zapatos = Zapato::all();
+        $productos = Producto::all();
 
         return view('productos.index', [
-            'zapatos' => $zapatos,
+            'productos' => $productos,
         ]);
     }
 
@@ -29,7 +29,7 @@ class ZapatoController extends Controller
      */
     public function create()
     {
-        $producto = new Zapato();
+        $producto = new Producto();
 
         return view('productos.create', [
             'producto' => $producto,
@@ -42,11 +42,11 @@ class ZapatoController extends Controller
      * @param  \App\Http\Requests\StoreZapatoRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreZapatoRequest $request)
+    public function store(StoreProductoRequest $request)
     {
         $validados = $request->validated();
 
-        $producto = new Zapato();
+        $producto = new Producto();
         $producto->nombre = $validados['nombre'];
 
         $image = $request->file('imagen');
@@ -69,10 +69,10 @@ class ZapatoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Zapato  $zapato
+     * @param  \App\Models\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function show(Zapato $zapato)
+    public function show(Producto $producto)
     {
         //
     }
@@ -80,12 +80,12 @@ class ZapatoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Zapato  $zapato
+     * @param  \App\Models\Producto  $producto
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $producto = Zapato::findOrFail($id);
+        $producto = Producto::findOrFail($id);
 
         return view('productos.edit', [
             'producto' => $producto,
@@ -95,8 +95,8 @@ class ZapatoController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateZapatoRequest  $request
-     * @param  \App\Models\Zapato  $zapato
+     * @param  \App\Http\Requests\UpdateProductoRequest  $request
+     * @param  \App\Models\Producto  $producto
      * @return \Illuminate\Http\Response
      */
     public function update($id)
@@ -108,7 +108,7 @@ class ZapatoController extends Controller
             'precio'=> 'required',
         ]);
 
-        $producto = Zapato::findOrFail($id);
+        $producto = Producto::findOrFail($id);
         $producto->nombre = $validados['nombre'];
         $producto->descripcion = $validados['descripcion'];
         $producto->precio = $validados['precio'];
@@ -121,10 +121,10 @@ class ZapatoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Zapato  $zapato
+     * @param  \App\Models\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Zapato $zapato)
+    public function destroy(Producto $producto)
     {
         //
     }

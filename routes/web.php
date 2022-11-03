@@ -3,7 +3,7 @@
 use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\FacturaController;
 use App\Http\Controllers\LineaController;
-use App\Http\Controllers\ZapatoController;
+use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\PedidoAdminController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -33,14 +33,14 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-    Route::get('/productos/index', [ZapatoController::class, 'index']);
+    Route::get('/productos', [ProductoController::class, 'index'])->name('productos');
 
     Route::resource('facturas', FacturaController::class);
 
     Route::post('/facturas/cambiar_estado', [FacturaController::class, 'cambiar_estado'])
         ->name('cambiar_estado');
 
-    Route::post('/carritos/meter/{zapato}', [CarritoController::class, 'anadiralcarrito'])
+    Route::post('/carritos/meter/{producto}', [CarritoController::class, 'anadiralcarrito'])
         ->name('anadiralcarrito');
 
     Route::post('/carritos/restar/{carrito}', [CarritoController::class, 'restar'])
@@ -66,7 +66,15 @@ Route::middleware(['auth', 'can:solo-admin'])->group(function () {
 
     Route::resource('todosLosPedidos', PedidoAdminController::class);
 
-    Route::resource('productos', ZapatoController::class);
+    Route::get('/productos/index', [ProductoController::class, 'edit']);
+    Route::get('/productos/create', [ProductosController::class, 'create']);
+    Route::post('/productos', [ProductosController::class, 'store'])
+        ->name('productos.store');
+    Route::get('/productos/{id}/edit', [ProductosController::class, 'edit']);
+    Route::delete('/productos/{id}', [ProductosController::class, 'destroy']);
+    Route::put('/productos/{id}', [ProductosController::class, 'update'])
+        ->name('productos.update');
+
 
 
 });

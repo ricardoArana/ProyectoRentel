@@ -15,9 +15,9 @@ class Linea extends Model
         return $this->belongsTo(Factura::class);
     }
 
-    public function zapato()
+    public function producto()
     {
-        return $this->belongsTo(Zapato::class);
+        return $this->belongsTo(Producto::class);
     }
 
 

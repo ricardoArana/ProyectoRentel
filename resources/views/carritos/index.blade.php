@@ -25,9 +25,9 @@
                             <tbody>
                                 @foreach ($carritos as $carrito)
                                     <tr>
-                                        <td class="px-6 py-2">{{ $carrito->zapato->nombre }}</td>
+                                        <td class="px-6 py-2">{{ $carrito->producto->nombre }}</td>
                                         <td class="px-6 py-2">{{ $carrito->cantidad }}</td>
-                                        <td class="px-6 py-2">{{ $carrito->zapato->precio * $carrito->cantidad}}</td>
+                                        <td class="px-6 py-2">{{ $carrito->producto->precio * $carrito->cantidad}}</td>
                                         <td>
                                             <div class="text-sm text-gray-900 ">
                                                 <form action="{{ route('restar', $carrito) }}" method="POST">

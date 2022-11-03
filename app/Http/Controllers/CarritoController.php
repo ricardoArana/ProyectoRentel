@@ -7,7 +7,7 @@ use App\Http\Requests\UpdateCarritoRequest;
 use App\Models\Carrito;
 use App\Models\Factura;
 use App\Models\Linea;
-use App\Models\Zapato;
+use App\Models\Producto;
 use Illuminate\Support\Facades\Auth;
 
 class CarritoController extends Controller
@@ -92,27 +92,27 @@ class CarritoController extends Controller
         //
     }
 
-    public function anadiralcarrito(Zapato $zapato)
+    public function anadiralcarrito(Producto $producto)
     {
-        $carrito = Carrito::where('zapato_id', $zapato->id)->where('user_id', auth()->user()->id)->first();
+        $carrito = Carrito::where('producto_id', $producto->id)->where('user_id', auth()->user()->id)->first();
 
         if (empty($carrito)) {
 
             $carrito = new Carrito();
 
             $carrito->user_id = Auth::user()->id;
-            $carrito->zapato_id = $zapato->id;
+            $carrito->producto_id = $producto->id;
             $carrito->cantidad = 1;
 
             $carrito->save();
 
-            return redirect()->route('productos.index')->with('success', 'Producto añadido al carrito.');
+            return redirect()->route('productos')->with('success', 'Producto añadido al carrito.');
         }
 
         $carrito->cantidad += 1;
         $carrito->save();
 
-        return redirect()->route('productos.index')->with('success', 'Producto anadido al carrito.');
+        return redirect()->route('productos')->with('success', 'Producto anadido al carrito.');
     }
 
     public function restar(Carrito $carrito)
@@ -159,7 +159,7 @@ class CarritoController extends Controller
         foreach ($carrito as $lineacarrito) {
             $nuevalinea = new Linea();
             $nuevalinea->factura_id = $nuevafactura->id;
-            $nuevalinea->zapato_id = $lineacarrito->zapato_id;
+            $nuevalinea->producto_id = $lineacarrito->producto_id;
             $nuevalinea->cantidad = $lineacarrito->cantidad;
             $nuevalinea->save();
         }

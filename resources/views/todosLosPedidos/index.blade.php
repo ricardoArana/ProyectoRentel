@@ -33,10 +33,10 @@
                                 @foreach ($factura->lineas as $linea)
 
                                 <tr>
-                                    <td class="px-6 py-2"><img class="h-44 w-full" src="{{ URL($linea->zapato->imagen) }}" alt="imagen del producto"></td>
-                                    <td class="px-6 py-2">{{ $linea->zapato->nombre }}</td>
+                                    <td class="px-6 py-2"><img class="h-44 w-full" src="{{ URL($linea->producto->imagen) }}" alt="imagen del producto"></td>
+                                    <td class="px-6 py-2">{{ $linea->producto->nombre }}</td>
                                     <td class="px-6 py-2">{{ $linea->cantidad }}</td>
-                                    <td class="px-6 py-2">{{ $linea->zapato->precio * $linea->cantidad }}$</td>
+                                    <td class="px-6 py-2">{{ $linea->producto->precio * $linea->cantidad }}$</td>
                                     <td class="px-6 py-2">{{ $linea->estado }}</td>
                                         <td>
                                             <div class="text-sm text-gray-900 ">

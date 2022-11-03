@@ -9,9 +9,9 @@ class Carrito extends Model
 {
     use HasFactory;
 
-    public function zapato()
+    public function producto()
     {
-        return $this->belongsTo(Zapato::class);
+        return $this->belongsTo(Producto::class);
     }
 
     public function user()

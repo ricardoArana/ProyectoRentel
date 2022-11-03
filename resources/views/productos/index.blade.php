@@ -12,15 +12,15 @@
                     <x-plantilla>
                         <table class="table-auto">
                             <tbody>
-                                @foreach ($zapatos as $zapato)
+                                @foreach ($productos as $producto)
                                     <tr>
-                                        <td class="px-6 py-2"><img class="h-44 w-full" src="{{ URL($zapato->imagen) }}" alt="imagen del producto"></td>
-                                        <td class="px-6 py-2">{{ $zapato->nombre }}</td>
-                                        <td class="px-6 py-2">{{ $zapato->descripcion }}</td>
-                                        <td class="px-6 py-2">{{ $zapato->precio }}</td>
+                                        <td class="px-6 py-2"><img class="h-44 w-full" src="{{ URL($producto->imagen) }}" alt="imagen del producto"></td>
+                                        <td class="px-6 py-2">{{ $producto->nombre }}</td>
+                                        <td class="px-6 py-2">{{ $producto->descripcion }}</td>
+                                        <td class="px-6 py-2">{{ $producto->precio }}</td>
                                         <td>
                                             <div class="text-sm text-gray-900 ">
-                                                <form action="{{ route('anadiralcarrito', $zapato) }}" method="POST">
+                                                <form action="{{ route('anadiralcarrito', $producto) }}" method="POST">
                                                     @csrf
                                                     @method('POST')
                                                     <button type="submit" class="px-4 py-1 text-sm text-white bg-red-400 rounded">Añadir al carrito</button>
@@ -28,7 +28,7 @@
                                             </div>
                                         </td>
                                         <td class="px-6 py-4">
-                                            <a href="/productos/{{ $zapato->id }}/edit"
+                                            <a href="/productos/{{ $producto->id }}/edit"
                                                 class="px-4 py-1 text-sm text-white bg-blue-400 rounded">Editar</a>
                                         </td>
                                     </tr>
