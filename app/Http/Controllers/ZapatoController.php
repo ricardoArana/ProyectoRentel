@@ -57,7 +57,6 @@ class ZapatoController extends Controller
             /* Lo guardamos en la base de datos como string */
             $producto->imagen = "img/" . $image->getClientOriginalName();
 
-
         $producto->descripcion = $validados['descripcion'];
         $producto->precio = $validados['precio'];
 
@@ -84,9 +83,13 @@ class ZapatoController extends Controller
      * @param  \App\Models\Zapato  $zapato
      * @return \Illuminate\Http\Response
      */
-    public function edit(Zapato $zapato)
+    public function edit($id)
     {
-        //
+        $producto = Zapato::findOrFail($id);
+
+        return view('productos.edit', [
+            'producto' => $producto,
+        ]);
     }
 
     /**
@@ -96,9 +99,23 @@ class ZapatoController extends Controller
      * @param  \App\Models\Zapato  $zapato
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateZapatoRequest $request, Zapato $zapato)
+    public function update($id)
     {
-        //
+
+        $validados = request()->validate([
+            'nombre'=> 'required|string|max:255',
+            'descripcion'=> 'required',
+            'precio'=> 'required',
+        ]);
+
+        $producto = Zapato::findOrFail($id);
+        $producto->nombre = $validados['nombre'];
+        $producto->descripcion = $validados['descripcion'];
+        $producto->precio = $validados['precio'];
+        $producto->save();
+
+        return redirect('/productos')
+            ->with('success', 'Producto modificado con éxito.');
     }
 
     /**
