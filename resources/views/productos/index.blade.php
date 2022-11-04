@@ -28,6 +28,8 @@
                                             </div>
                                         </td>
                                         <td class="px-6 py-4">
+                                            @if (Auth::user()->rol == "admin")
+
                                             <a href="/productos/{{ $producto->id }}/edit"
                                                 class="px-4 py-1 text-sm text-white bg-blue-400 rounded">Editar</a>
 
@@ -36,11 +38,15 @@
                                                     @method('DELETE')
                                                     <button onclick="return confirm('¿Seguro?')" class="px-4 py-1 text-sm text-white bg-red-400 rounded" type="submit">Borrar</button>
                                                 </form>
+                                                @endif
                                         </td>
                                     </tr>
 
                                 @endforeach
+                                @if (Auth::user()->rol == "admin")
+
                                 <a href="/productos/create" class="mt-4 text-blue-900 hover:underline">Insertar un nuevo producto</a>
+                                @endif
 
                             </tbody>
                         </table>
