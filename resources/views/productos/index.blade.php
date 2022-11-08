@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h1 class="font-semibold leading-tight bg-black">
-            {{ __('PRODUCTOS') }}
+            {{ __('ORDERS') }}
         </h1>
     </x-slot>
 
@@ -14,16 +14,16 @@
                             <tbody>
                                 @foreach ($productos as $producto)
                                     <tr>
-                                        <td class="px-6 py-2"><img class="h-44 w-full" src="{{ URL($producto->imagen) }}" alt="imagen del producto"></td>
-                                        <td class="px-6 py-2">{{ $producto->nombre }}</td>
-                                        <td class="px-6 py-2">{{ $producto->descripcion }}</td>
-                                        <td class="px-6 py-2">{{ $producto->precio }}</td>
+                                        <td class="px-6 py-2"><img class="h-60 w-full" src="{{ URL($producto->imagen) }}" alt="imagen del producto"></td>
+                                        <td class="px-6 py-2"><p class="text-xl mb-4">{{ $producto->nombre }}</p>{{ $producto->descripcion }}</td>
+
+                                        <td class="px-6 py-2">{{ $producto->precio }} &euro;</td>
                                         <td>
                                             <div class="text-sm text-gray-900 ">
                                                 <form action="{{ route('anadiralcarrito', $producto) }}" method="POST">
                                                     @csrf
                                                     @method('POST')
-                                                    <button type="submit" class="px-4 py-1 text-sm text-white bg-red-400 rounded">Añadir al carrito</button>
+                                                    <button type="submit" class="px-4 py-1 text-sm text-white bg-orange-500 rounded">Añadir al carrito</button>
                                                 </form>
                                             </div>
                                         </td>
@@ -31,12 +31,12 @@
                                             @if (Auth::user()->rol == "admin")
 
                                             <a href="/productos/{{ $producto->id }}/edit"
-                                                class="px-4 py-1 text-sm text-white bg-blue-400 rounded">Editar</a>
+                                                class="px-4 py-1 text-sm text-white bg-blue-600 rounded">Editar</a>
 
                                                 <form action="/productos/{{ $producto->id }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button onclick="return confirm('¿Seguro?')" class="px-4 py-1 text-sm text-white bg-red-400 rounded" type="submit">Borrar</button>
+                                                    <button onclick="return confirm('¿Seguro?')" class="px-4 py-1 mt-5 text-sm text-white bg-red-600 rounded" type="submit">Borrar</button>
                                                 </form>
                                                 @endif
                                         </td>

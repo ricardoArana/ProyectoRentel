@@ -35,5 +35,32 @@
                 {{ $slot }}
             </main>
         </div>
+        <footer class="flex justify-center bg-gray-900   w-full h-96 mt-1">
+            <div class="bg-black text-white mt-4 w-full mx-10 h-5/6">
+                <div class="bg-black grid grid-rows-3 grid-flow-col gap-4  h-4/5">
+                    <div class="absolute mt-10">
+                        <p class="ml-44 text-2xl">gerardo@rentel.es</p>
+                    </div>
+                    <div class="inline-flex mt-20 ml-44 col-span-full">
+                        <a href="https://www.youtube.com/channel/UC-t6s_YDUsRrJRGg3CrNxlA"><img class="mt-3 mr-1 w-8 h-8"
+                                src="{{ URL('img/youtube.png') }}" alt="facebook"> Gerardo Calado</a>
+                    </div>
+                    <div class="col-span-2 row-span-4 text-right mr-44 mt-10">
+                        <p class="text-2xl">¿Tiene algún problema?</p>
+                        <p class="text-xl mr-3 mt-2"> <a class="text-orange-500" href="#">Contacte</a> con nosotros
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full absolute mt-20">
+                <p class="text-center text-2xl"><a class="hover:text-orange-500 text-white" href="{{ route('productos') }}"> Nuestros
+                        Productos</a>
+                </p>
+            </div>
+            <div class="w-50 h-auto absolute mt-36">
+                <a href="{{ route('productos') }}"><img style="height: 20%; width: 20%; margin-left:40%" class="mt-3 mr-1"
+                    src="{{ URL('img/logo.png') }}" alt="logo"></a>
+            </div>
+        </footer>
     </body>
 </html>

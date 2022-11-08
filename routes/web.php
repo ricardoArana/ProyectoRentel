@@ -5,6 +5,7 @@ use App\Http\Controllers\FacturaController;
 use App\Http\Controllers\LineaController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\PedidoAdminController;
+use App\Models\Producto;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -20,12 +21,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $productos = Producto::all();
+    return view('welcome', ['productos' => $productos]);
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
 
 Route::middleware(['auth'])->group(function () {
 
@@ -34,6 +33,7 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('/productos', [ProductoController::class, 'index'])->name('productos');
+    Route::get('/producto', [ProductoController::class, 'producto'])->name('producto');
 
     Route::resource('facturas', FacturaController::class);
 

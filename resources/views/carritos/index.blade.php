@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold leading-tight">
-            {{ __('Carrito') }}
+            {{ __('CART') }}
         </h2>
     </x-slot>
 
@@ -13,13 +13,13 @@
                         <table class="table-auto">
                             <thead>
                                 <th class="px-6 py-2 text-gray-500">
-                                    Zapato
+                                    Product
                                 </th>
                                 <th class="px-6 py-2 text-gray-500">
-                                    Cantidad
+                                    Amount
                                 </th>
                                 <th class="px-6 py-2 text-gray-500">
-                                    Precio
+                                    Price
                                 </th>
                             </thead>
                             <tbody>

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold leading-tight">
-            {{ __('Pedidos') }}
+            {{ __('Orders') }}
         </h2>
     </x-slot>
 
@@ -16,28 +16,34 @@
 
                                 </th>
                                 <th class="px-6 py-2 text-gray-500">
-                                    Nombre
+                                    Name
                                 </th>
                                 <th class="px-6 py-2 text-gray-500">
-                                    Cantidad
+                                    Amount
                                 </th>
                                 <th class="px-6 py-2 text-gray-500">
-                                    Precio
+                                    Price
                                 </th>
                                 <th class="px-6 py-2 text-gray-500">
-                                    Estado
+                                    State
+                                </th>
+                                <th class="px-6 py-2 text-gray-500">
+                                    Order placed
                                 </th>
                             </thead>
                             <tbody>
                                 @foreach ($facturas as $factura)
                                 @foreach ($factura->lineas as $linea)
-
+@php
+    $fecha = explode(' ', $linea->created_at)
+@endphp
                                 <tr>
                                     <td class="px-6 py-2"><img class="h-44 w-full" src="{{ URL($linea->producto->imagen) }}" alt="imagen del producto"></td>
                                     <td class="px-6 py-2">{{ $linea->producto->nombre }}</td>
                                     <td class="px-6 py-2">{{ $linea->cantidad }}</td>
                                     <td class="px-6 py-2">{{ $linea->producto->precio * $linea->cantidad }}$</td>
                                     <td class="px-6 py-2">{{ $linea->estado }}</td>
+                                    <td class="px-6 py-2">{{$fecha[0]}}</td>
                                         <td>
                                             <div class="text-sm text-gray-900 ">
                                                 {{-- <form action="{{ route('anadiralcarrito', $zapato) }}" method="POST">
