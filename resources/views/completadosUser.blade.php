@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold leading-tight">
-            {{ __('Pedidos') }}
+            {{ __('Orders') }}
         </h2>
     </x-slot>
 
@@ -16,16 +16,19 @@
 
                                 </th>
                                 <th class="px-6 py-2 text-gray-500">
-                                    Nombre
+                                    Name
                                 </th>
                                 <th class="px-6 py-2 text-gray-500">
-                                    Cantidad
+                                    Amount
                                 </th>
                                 <th class="px-6 py-2 text-gray-500">
-                                    Precio
+                                    Price
                                 </th>
                                 <th class="px-6 py-2 text-gray-500">
-                                    Estado
+                                    State
+                                </th>
+                                <th class="px-6 py-2 text-gray-500">
+                                    Order placed
                                 </th>
                             </thead>
                             <tbody>
@@ -35,31 +38,30 @@
 
 
                                 @else
+@php
+    $fecha = explode(' ', $linea->created_at)
+@endphp
                                 <tr>
                                     <td class="px-6 py-2"><img class="h-44 w-auto" src="{{ URL($linea->producto->imagen) }}" alt="imagen del producto"></td>
                                     <td class="px-6 py-2">{{ $linea->producto->nombre }}</td>
                                     <td class="px-6 py-2">{{ $linea->cantidad }}</td>
                                     <td class="px-6 py-2">{{ $linea->producto->precio * $linea->cantidad }}$</td>
                                     <td class="px-6 py-2">{{ $linea->estado }}</td>
-                                    <td>
-                                        <div class="text-sm text-gray-900 ">
-                                            <form action="{{ route('edit', $linea) }}" method="POST">
-                                                @csrf
-                                                @method('POST')
-                                                <select name="estado" id="estado">
-                                                    <option  value="Pending to send">Pending to send</option>
-                                                    <option value="Product sent">Product sent</option>
-                                                    <option value="Completed">Completed</option>
+                                    <td class="px-6 py-2">{{$fecha[0]}}</td>
+                                        <td>
+                                            <div class="text-sm text-gray-900 ">
+                                                {{-- <form action="{{ route('anadiralcarrito', $zapato) }}" method="POST">
+                                                    @csrf
+                                                    @method('POST')
+                                                    <button type="submit" class="px-4 py-1 text-sm text-white bg-red-400 rounded">Añadir al carrito</button>
+                                                </form> --}}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @endif
 
-                                                    <input type="submit" class="px-4 py-1 text-sm text-white bg-red-400 rounded" value="Cambiar estado">
-                                                </select>
-                                            </form>
-                                        </div>
-                                    </td>
-                                </tr>
-                                @endif
-                                @endforeach
-                                @endforeach
+                                    @endforeach
+                                    @endforeach
                                 </tbody>
                             </table>
                         </x-plantilla>

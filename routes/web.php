@@ -33,7 +33,8 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('/productos', [ProductoController::class, 'index'])->name('productos');
-    Route::get('/producto', [ProductoController::class, 'producto'])->name('producto');
+
+    Route::get('/producto/{producto}', [ProductoController::class, 'producto'])->name('producto');
 
     Route::resource('facturas', FacturaController::class);
 
@@ -58,6 +59,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/carritos/factura', [CarritoController::class, 'pedido'])
         ->name('pedido');
 
+        Route::get('/completadosUser', [PedidoAdminController::class, 'completadosUser'])->name('completadosUser');
     /* Route::resource('todosLosPedidos', PedidoAdminController::class)
         ->middleware(['auth', 'can:solo-admin']); */
 });

@@ -22,6 +22,9 @@
                     <x-nav-link :href="route('facturas.index')" :active="request()->routeIs('facturas.index')">
                         {{ __('My orders') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('completadosUser')" :active="request()->routeIs('completadosUser')">
+                        {{ __('Purchase history') }}
+                    </x-nav-link>
                     @if (Auth::user()->rol == "admin")
 
                     <x-nav-link :href="route('todosLosPedidos')" :active="request()->routeIs('todosLosPedidos')">

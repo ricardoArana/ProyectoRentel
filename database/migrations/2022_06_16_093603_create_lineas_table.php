@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('factura_id')->constrained('facturas');
             $table->foreignId('producto_id')->constrained('productos');
             $table->integer('cantidad');
-            $table->string('estado')->default('pendiente');
+            $table->string('estado')->default('Pending to send');
             $table->timestamps();
         });
     }

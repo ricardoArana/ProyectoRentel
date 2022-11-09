@@ -12,6 +12,12 @@
                     <x-plantilla>
                         <table class="table-auto">
                             <thead>
+                                @if ($carritos->isEmpty())
+                                <p>You have not added anything to the cart yet</p>
+                            @else
+                                <th class="px-6 py-2 text-gray-500">
+
+                                </th>
                                 <th class="px-6 py-2 text-gray-500">
                                     Product
                                 </th>
@@ -21,15 +27,28 @@
                                 <th class="px-6 py-2 text-gray-500">
                                     Price
                                 </th>
+                                <th class="px-6 py-2 text-gray-500">
+
+                                </th>
+                                <th class="px-6 py-2 text-gray-500">
+
+                                    <form action="{{route('vaciar')}}" method="post">
+                                        @csrf
+                                        @method('POST')
+                                        <button class="bg-red-400 text-black px-7 py-2 rounded-xl" type="submit"> Empty cart</button>
+                                    </form>
+                                </th>
+                                @endif
                             </thead>
                             <tbody>
 
 
                                 @foreach ($carritos as $carrito)
                                     <tr>
+                                        <td class="px-6 py-2"><img class="h-60 w-auto" src="{{ URL($carrito->producto->imagen) }}" alt="imagen del producto"></td>
                                         <td class="px-6 py-2">{{ $carrito->producto->nombre }}</td>
                                         <td class="px-6 py-2">{{ $carrito->cantidad }}</td>
-                                        <td class="px-6 py-2">{{ $carrito->producto->precio * $carrito->cantidad}}</td>
+                                        <td class="px-6 py-2">{{ $carrito->producto->precio * $carrito->cantidad}}&euro;</td>
                                         <td>
                                             <div class="text-sm text-gray-900 ">
                                                 <form action="{{ route('restar', $carrito) }}" method="POST">
@@ -55,17 +74,13 @@
                         @if ($carritos->isEmpty())
                             @else
                             <div class="mt-5">
-                                <form action="{{route('vaciar')}}" method="post">
-                                    @csrf
-                                    @method('POST')
-                                    <button class="bg-red-500 text-black px-7 py-2" type="submit"> Vaciar carrito</button>
-                                </form>
+
                             </div>
                             <div class="mt-5">
                                 <form action="{{route('pedido')}}" method="post">
                                     @csrf
                                     @method('POST')
-                                    <button class="bg-green-500 text-black px-7 py-2" type="submit"> Realizar pedido</button>
+                                    <button class="bg-orange-600 text-white px-8 py-3 text-xl rounded-xl" type="submit"> Proceed to buy</button>
                                 </form>
                             </div>
                             @endif

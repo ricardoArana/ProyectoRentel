@@ -13,9 +13,24 @@
                         <table class="table-auto">
                             <tbody>
                                 @foreach ($productos as $producto)
-                                    <tr>
-                                        <td class="px-6 py-2"><img class="h-60 w-full" src="{{ URL($producto->imagen) }}" alt="imagen del producto"></td>
-                                        <td class="px-6 py-2"><p class="text-xl mb-4">{{ $producto->nombre }}</p>{{ $producto->descripcion }}</td>
+                                    <tr class="border-2 border-grey-700">
+                                        @php
+                                        $vermas = false;
+                                            $desCorta = substr($producto->descripcion, 0, 70);
+                                            if (strlen($producto->descripcion) > 70) {
+                                                $desCorta = $desCorta . '...';
+                                                $vermas = true;
+                                            }
+                                            else {
+                                                $vermas = false;
+                                            }
+                                        @endphp
+                                        <td class="px-6 py-2"><a href="{{route('producto', $producto)}}"> <img class="h-60 w-auto" src="{{ URL($producto->imagen) }}" alt="imagen del producto"></a></td>
+                                        <td class="px-6 py-2 w-96"><p class="text-3xl mb-4 ">{{ $producto->nombre }}</p>{{ $desCorta }}
+                                        @if ($vermas)
+                                            <a href="{{route('producto', $producto)}}"> Ver más </a>
+                                        @endif
+                                    </td>
 
                                         <td class="px-6 py-2">{{ $producto->precio }} &euro;</td>
                                         <td>
@@ -23,7 +38,7 @@
                                                 <form action="{{ route('anadiralcarrito', $producto) }}" method="POST">
                                                     @csrf
                                                     @method('POST')
-                                                    <button type="submit" class="px-4 py-1 text-sm text-white bg-orange-500 rounded">Añadir al carrito</button>
+                                                    <button type="submit" class="px-4 py-1 text-sm text-white bg-orange-500 rounded">Add to cart</button>
                                                 </form>
                                             </div>
                                         </td>
@@ -45,7 +60,7 @@
                                 @endforeach
                                 @if (Auth::user()->rol == "admin")
 
-                                <a href="/productos/create" class="mt-4 text-blue-900 hover:underline">Insertar un nuevo producto</a>
+                                <a href="/productos/create" class="mt-4 text-orange-700 hover:underline text-xl">Insertar un nuevo producto</a>
                                 @endif
 
                             </tbody>

@@ -132,4 +132,11 @@ class ProductoController extends Controller
         return redirect()->back()
             ->with('success', 'Producto borrado correctamente');
     }
+
+    public function producto(Producto $producto)
+    {
+        return view('productos.producto', [
+            'producto' => $producto,
+        ]);
+    }
 }
