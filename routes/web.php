@@ -36,8 +36,11 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('/direccion', [DireccionController::class, 'index'])->name('indexDireccion');
+    Route::get('/editDireccion', [DireccionController::class, 'edit'])->name('editDireccion');
 
     Route::post('/direccion/{user}', [DireccionController::class, 'direccion'])->name('direccion');
+
+    Route::post('/setDireccion/{direccion}', [DireccionController::class, 'setDireccion'])->name('setDireccion');
 
 
 

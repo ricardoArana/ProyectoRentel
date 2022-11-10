@@ -1,10 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold leading-tight">
-            {{ __('Add your address') }}
+            {{ __('Edit your address') }}
         </h2>
     </x-slot>
-    <form action="{{route('direccion', Auth::user())}}" method="post">
+    <form action="{{route('setDireccion', Auth::user())}}" method="post">
         @csrf
         @method('POST')
 
@@ -14,7 +14,7 @@
                 class="text-sm font-medium text-gray-900 block mb-2 @error('calle') text-red-500 @enderror">
                 Street
             </label>
-            <input type="text" name="calle" id="calle"
+            <input type="text" name="calle" id="calle" value="{{Auth::user()->direccion->calle}}"
                 class="w-80 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 @error('nombre') border-red-500 @enderror">
 
 
@@ -23,7 +23,7 @@
                 class="text-sm font-medium text-gray-900 block mb-2 @error('ciudad') text-red-500 @enderror">
                 City
             </label>
-            <input type="text" name="ciudad" id="ciudad"
+            <input type="text" name="ciudad" id="ciudad" value="{{ Auth::user()->direccion->ciudad }}"
                 class="w-80 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 @error('nombre') border-red-500 @enderror">
 
 
@@ -32,7 +32,7 @@
                 class="text-sm font-medium text-gray-900 block mb-2 @error('codigo_postal') text-red-500 @enderror">
                 Postal code
             </label>
-            <input type="text" name="codigo_postal" id="codigo_postal"
+            <input type="text" name="codigo_postal" id="codigo_postal" value="{{ Auth::user()->direccion->codigo_postal }}"
                 class="w-80 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 @error('nombre') border-red-500 @enderror">
 
 
@@ -40,7 +40,7 @@
                 class="text-sm font-medium text-gray-900 block mb-2 @error('pais') text-red-500 @enderror">
                 Country
             </label>
-            <input type="text" name="pais" id="pais"
+            <input type="text" name="pais" id="pais" value="{{ Auth::user()->direccion->pais }}"
                 class="w-80 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 @error('nombre') border-red-500 @enderror">
 
 

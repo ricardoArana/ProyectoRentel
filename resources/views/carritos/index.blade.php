@@ -91,8 +91,22 @@
 
                                     <button class="bg-orange-600 text-white px-8 py-3 text-xl rounded-xl" type="submit"> Proceed to buy</button>
                                 </form>
-                                    @endif
                             </div>
+<div class="w-full ml-52 text-xl mt-20">
+    <p><b> Your address is: </b></p>
+                                                            <p>
+                                                                Street: {{Auth::user()->direccion->calle}} <br>
+                                                                City: {{Auth::user()->direccion->ciudad}} <br>
+                                                                Postal code:{{Auth::user()->direccion->codigo_postal}} <br>
+                                                                Country: {{Auth::user()->direccion->pais}}
+                                                            </p>
+                                                            <form action="{{route('editDireccion', Auth::user()->direccion)}}" method="get">
+                                                                @csrf
+                                                                @method('GET')
+                                                            <button type="submit" class="bg-orange-600 text-white px-6 py-2 mt-5 text-xl rounded-xl">Set address</button>
+                                                            </form>
+                                                        </div>
+                                                            @endif
                             @endif
                         </x-plantilla>
                     </div>

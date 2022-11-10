@@ -70,16 +70,20 @@
                                 @endphp
                                     <tr class="datosUsuario" style="display: none;">
                                         <td colspan="2" class="px-3 ">
-                                            Nombre: {{$linea->factura->user->name}}
+                                            <b> Nombre: </b> {{$linea->factura->user->name}}
                                         </td>
                                         <td class="px-3">
-                                            Email: {{$linea->factura->user->email}}
+                                            <b> Email: </b> {{$linea->factura->user->email}}
                                         </td>
                                         <td colspan="2" class="px-3">
-                                            Direccion: {{$linea->factura->user->name}}
+                                            <b>Direccion: </b> <br>
+                                            <b> Calle: </b> {{$linea->factura->user->direccion->calle}} <br>
+                                            <b> Ciudad:</b> {{$linea->factura->user->direccion->ciudad}} <br>
+                                            <b> Codigo postal: </b> {{$linea->factura->user->direccion->codigo_postal}} <br>
+                                            <b> Pais: </b>{{$linea->factura->user->direccion->pais}}
                                         </td>
                                         <td colspan="3" class="px-3">
-                                            Fecha del pedido: {{$fecha[0]}}
+                                            <b>Fecha del pedido: </b> {{$fecha[0]}}
                                         </td>
                                     </tr>
                                     @endif
