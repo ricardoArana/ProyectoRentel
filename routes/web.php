@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CarritoController;
+use App\Http\Controllers\DireccionController;
 use App\Http\Controllers\FacturaController;
 use App\Http\Controllers\LineaController;
 use App\Http\Controllers\ProductoController;
@@ -30,9 +31,15 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('carritos', CarritoController::class);
 
-
-
     Route::get('/productos', [ProductoController::class, 'index'])->name('productos');
+
+
+
+    Route::get('/direccion', [DireccionController::class, 'index'])->name('indexDireccion');
+
+    Route::post('/direccion/{user}', [DireccionController::class, 'direccion'])->name('direccion');
+
+
 
     Route::get('/producto/{producto}', [ProductoController::class, 'producto'])->name('producto');
 

@@ -77,11 +77,21 @@
 
                             </div>
                             <div class="mt-5">
+                                @if (Auth::user()->direccion == null)
+                                <form action="{{route('indexDireccion')}}" method="get">
+                                    @csrf
+                                    @method('GET')
+
+                                    <button class="bg-orange-600 text-white px-8 py-3 text-xl rounded-xl" type="submit"> Set your address</button>
+                                </form>
+                                @else
                                 <form action="{{route('pedido')}}" method="post">
                                     @csrf
                                     @method('POST')
+
                                     <button class="bg-orange-600 text-white px-8 py-3 text-xl rounded-xl" type="submit"> Proceed to buy</button>
                                 </form>
+                                    @endif
                             </div>
                             @endif
                         </x-plantilla>
