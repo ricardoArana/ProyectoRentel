@@ -41,7 +41,9 @@
                                 @endif
                             </thead>
                             <tbody>
-
+@php
+    $total = 0;
+@endphp
 
                                 @foreach ($carritos as $carrito)
                                     <tr>
@@ -49,6 +51,9 @@
                                         <td class="px-6 py-2">{{ $carrito->producto->nombre }}</td>
                                         <td class="px-6 py-2">{{ $carrito->cantidad }}</td>
                                         <td class="px-6 py-2">{{ $carrito->producto->precio * $carrito->cantidad}}&euro;</td>
+                                        @php
+                                            $total += $carrito->producto->precio * $carrito->cantidad;
+                                        @endphp
                                         <td>
                                             <div class="text-sm text-gray-900 ">
                                                 <form action="{{ route('restar', $carrito) }}" method="POST">
@@ -70,6 +75,7 @@
                                     </tr>
                                 @endforeach
                             </tbody>
+
                         </table>
                         @if ($carritos->isEmpty())
                             @else
@@ -82,14 +88,14 @@
                                     @csrf
                                     @method('GET')
 
-                                    <button class="bg-orange-600 text-white px-8 py-3 text-xl rounded-xl" type="submit"> Set your address</button>
+                                    <button class="bg-orange-600 hover:bg-orange-700 text-white px-8 py-3 text-xl rounded-xl" type="submit"> Set your address</button>
                                 </form>
                                 @else
-                                <form action="{{route('pedido')}}" method="post">
+                                <form action="{{route('pagar', $total)}}" method="get">
                                     @csrf
-                                    @method('POST')
+                                    @method('get')
 
-                                    <button class="bg-orange-600 text-white px-8 py-3 text-xl rounded-xl" type="submit"> Proceed to buy</button>
+                                    <button class="bg-orange-600 hover:bg-orange-700 text-white px-8 py-3 text-xl rounded-xl" type="submit"> Proceed to buy</button>
                                 </form>
                             </div>
 <div class="w-full ml-52 text-xl mt-20">

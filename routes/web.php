@@ -6,6 +6,7 @@ use App\Http\Controllers\FacturaController;
 use App\Http\Controllers\LineaController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\PedidoAdminController;
+use App\Http\Controllers\StripeController;
 use App\Models\Producto;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +21,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/stripe-payment/{total}', [StripeController::class, 'handleGet'])->name('pagar');
+Route::post('/stripe-payment', [StripeController::class, 'handlePost'])->name('stripe.payment');
 
 Route::get('/', function () {
     $productos = Producto::all();

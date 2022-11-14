@@ -2,7 +2,7 @@
 
     <x-slot name="header">
         <h2 class="font-semibold leading-tight">
-            {{ __('Crear producto') }}
+            {{ __('Editar producto') }}
         </h2>
     </x-slot>
 

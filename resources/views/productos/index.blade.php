@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h1 class="font-semibold leading-tight bg-black">
-            {{ __('ORDERS') }}
+            {{ __('PRODUCTS') }}
         </h1>
     </x-slot>
 
@@ -60,7 +60,7 @@
                                 @endforeach
                                 @if (Auth::user()->rol == "admin")
 
-                                <a href="/productos/create" class="mt-4 text-orange-700 hover:underline text-xl">Insertar un nuevo producto</a>
+                                <a href="/productos/create" class="my-4 text-orange-700 hover:underline text-xl">Insertar un nuevo producto</a>
                                 @endif
 
                             </tbody>
