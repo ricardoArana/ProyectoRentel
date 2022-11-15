@@ -42,7 +42,7 @@
     $fecha = explode(' ', $linea->created_at)
 @endphp
                                 <tr>
-                                    <td class="px-6 py-2"><img class="h-44 w-auto" src="{{ URL($linea->producto->imagen) }}" alt="imagen del producto"></td>
+                                    <td class="px-6 py-2"><img class="h-44 w-auto" src="{{ URL($linea->producto->imagenes[0]->imagen) }}" alt="imagen del producto"></td>
                                     <td class="px-6 py-2">{{ $linea->producto->nombre }}</td>
                                     <td class="px-6 py-2">{{ $linea->cantidad }}</td>
                                     <td class="px-6 py-2">{{ $linea->producto->precio * $linea->cantidad }}$</td>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProductoRequest;
 use App\Http\Requests\UpdateProductoRequest;
+use App\Models\Imagen;
 use App\Models\Producto;
 
 class ProductoController extends Controller
@@ -16,9 +17,11 @@ class ProductoController extends Controller
     public function index()
     {
         $productos = Producto::all();
+        $imagenes = Imagen::all();
 
         return view('productos.index', [
             'productos' => $productos,
+            'imagenes' => $imagenes
         ]);
     }
 
@@ -47,6 +50,7 @@ class ProductoController extends Controller
         $validados = $request->validated();
 
         $producto = new Producto();
+        $imagen = new Imagen();
         $producto->nombre = $validados['nombre'];
 
         $image = $request->file('imagen');
@@ -55,12 +59,13 @@ class ProductoController extends Controller
 
             /* $image->move('img', $image->getClientOriginalName()); */
             /* Lo guardamos en la base de datos como string */
-            $producto->imagen = "img/" . $image->getClientOriginalName();
+            $imagen->imagen = "img/" . $image->getClientOriginalName();
 
         $producto->descripcion = $validados['descripcion'];
         $producto->precio = $validados['precio'];
 
         $producto->save();
+        $imagen->save();
 
         return redirect('/productos')
             ->with('success', 'Producto insertado con éxito.');
@@ -135,8 +140,10 @@ class ProductoController extends Controller
 
     public function producto(Producto $producto)
     {
+        $imagenes = Imagen::where('producto_id', $producto->id);
         return view('productos.producto', [
             'producto' => $producto,
+            'imagenes' => $imagenes
         ]);
     }
 }

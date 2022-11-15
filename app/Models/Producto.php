@@ -19,5 +19,8 @@ class Producto extends Model
         return $this->hasMany(Linea::class);
     }
 
-
+    public function imagenes()
+    {
+        return $this->hasMany(Imagen::class);
+    }
 }

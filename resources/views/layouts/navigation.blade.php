@@ -12,7 +12,12 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex text-xl">
+                    @if (Auth::user()->rol == "admin")
+                    <x-nav-link class="ml-20" :href="route('productos')" :active="request()->routeIs('productos')">
+                        {{ __('Products') }}
+                    </x-nav-link>
+                    @else
                     <x-nav-link class="ml-20" :href="route('productos')" :active="request()->routeIs('productos')">
                         {{ __('Products') }}
                     </x-nav-link>
@@ -25,6 +30,7 @@
                     <x-nav-link :href="route('completadosUser')" :active="request()->routeIs('completadosUser')">
                         {{ __('Purchase history') }}
                     </x-nav-link>
+                    @endif
                     @if (Auth::user()->rol == "admin")
 
                     <x-nav-link :href="route('todosLosPedidos')" :active="request()->routeIs('todosLosPedidos')">

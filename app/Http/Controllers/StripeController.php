@@ -15,8 +15,10 @@ class StripeController extends Controller
      */
     public function handleGet($total)
     {
+        $carritos = Carrito::all();
         return view('home', [
             'total' => $total,
+            'carritos' => $carritos->where('user_id', Auth::user()->id),
         ]);
     }
 

@@ -1,7 +1,6 @@
-<!DOCTYPE html>
-<html>
+
+<x-app-layout>
 <head>
-	<title>Laravel 7 - Integrate Stripe Payment Gateway Example</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <style type="text/css">
@@ -9,6 +8,7 @@
             margin-top: 40px;
         }
         .panel-heading {
+            padding:0;
         display: inline;
         font-weight: bold;
         }
@@ -18,21 +18,25 @@
         .display-tr {
             display: table-row;
         }
-        .display-td {
+        .display-div {
             display: table-cell;
             vertical-align: middle;
             width: 55%;
         }
     </style>
 </head>
-<body>
+    <x-slot name="header">
+        <h2 class="font-semibold leading-tight">
+            {{ __('Payment') }}
+        </h2>
+    </x-slot>
 
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <div class="row text-center">
+                    <div class="row text-center pt-8">
                         <h3 class="panel-heading">Payment Details</h3>
                     </div>
                 </div>
@@ -102,8 +106,19 @@
         </div>
     </div>
 </div>
+<div class="grid grid-cols-5 gap-5 w-full px-[30%] items-center">
+@foreach ($carritos as $carrito)
 
-</body>
+                    <div class="col-span-2 px-6 py-2"><img class="h-60 w-auto" src="{{ URL($carrito->producto->imagenes[0]->imagen) }}" alt="imagen del producto"></div>
+                    <div class="px-6 py-2">{{ $carrito->producto->nombre }}</div>
+                    <div class="px-6 py-2">Quantity: {{ $carrito->cantidad }}</div>
+                    <div class="px-6 py-2">{{ $carrito->producto->precio * $carrito->cantidad}}&euro;</div>
+                    @php
+                        $total += $carrito->producto->precio * $carrito->cantidad;
+                    @endphp
+
+            @endforeach
+        </div>
 
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 
@@ -159,4 +174,5 @@ $(function() {
 
 });
 </script>
-</html>
+
+</x-app-layout>

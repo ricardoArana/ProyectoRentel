@@ -25,7 +25,7 @@
                                                 $vermas = false;
                                             }
                                         @endphp
-                                        <td class="px-6 py-2"><a href="{{route('producto', $producto)}}"> <img class="h-60 w-auto" src="{{ URL($producto->imagen) }}" alt="imagen del producto"></a></td>
+                                        <td class="px-6 py-2"><a href="{{route('producto', $producto)}}"> <img class="h-60 w-auto" src="{{ URL($producto->imagenes[0]->imagen) }}" alt="imagen del producto"></a></td>
                                         <td class="px-6 py-2 w-96"><p class="text-3xl mb-4 ">{{ $producto->nombre }}</p>{{ $desCorta }}
                                         @if ($vermas)
                                             <a href="{{route('producto', $producto)}}"> Ver más </a>

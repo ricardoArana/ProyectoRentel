@@ -47,7 +47,7 @@
 
                                 @foreach ($carritos as $carrito)
                                     <tr>
-                                        <td class="px-6 py-2"><img class="h-60 w-auto" src="{{ URL($carrito->producto->imagen) }}" alt="imagen del producto"></td>
+                                        <td class="px-6 py-2"><img class="h-60 w-auto" src="{{ URL($carrito->producto->imagenes[0]->imagen) }}" alt="imagen del producto"></td>
                                         <td class="px-6 py-2">{{ $carrito->producto->nombre }}</td>
                                         <td class="px-6 py-2">{{ $carrito->cantidad }}</td>
                                         <td class="px-6 py-2">{{ $carrito->producto->precio * $carrito->cantidad}}&euro;</td>

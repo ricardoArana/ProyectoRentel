@@ -22,20 +22,20 @@
     <div class="bg-gray-900 p-5 mx-20">
         <div class="relative w-[600px] mx-auto">
             <div class="slide relative">
-                <img class="w-full h-[450px] object-cover" src="{{ URL($productos[0]->imagen) }}">
+                <img class="w-full h-[450px] object-cover" src="{{ URL($productos[0]->imagenes[0]->imagen) }}">
                 <div class="absolute bottom-0 w-full px-5 py-3 bg-black/40 text-center text-white">
                     {{ $productos[0]->nombre }}</div>
             </div>
 
             <div class="relative w-[600px] mx-auto">
                 <div class="slide relative">
-                    <img class="w-full h-[450px] object-cover" src="{{ URL($productos[1]->imagen) }}">
+                    <img class="w-full h-[450px] object-cover" src="{{ URL($productos[1]->imagenes[0]->imagen) }}">
                     <div class="absolute bottom-0 w-full px-5 py-3 bg-black/40 text-center text-white">
                         {{ $productos[1]->nombre }}</div>
                 </div>
                 <div class="relative w-[600px] mx-auto">
                     <div class="slide relative">
-                        <img class="w-full h-[450px] object-cover" src="{{ URL($productos[2]->imagen) }}">
+                        <img class="w-full h-[450px] object-cover" src="{{ URL($productos[2]->imagenes[0]->imagen) }}">
                         <div class="absolute bottom-0 w-full px-5 py-3 bg-black/40 text-center text-white">
                             {{ $productos[2]->nombre }}</div>
                     </div>
