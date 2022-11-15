@@ -35,7 +35,7 @@
                 {{ $slot }}
             </main>
         </div>
-        <footer class="flex justify-center bg-gray-900   w-full h-96 mt-1">
+        <footer class="flex justify-center bg-black   w-full h-96 mt-1">
             <div class="bg-black text-white mt-4 w-full mx-10 h-5/6">
                 <div class="bg-black grid grid-rows-3 grid-flow-col gap-4  h-4/5">
                     <div class="absolute mt-10">

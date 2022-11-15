@@ -17,8 +17,8 @@
                         <div class="">
                         <div class="flex">
                             <img id="imgGrande" class="h-96 border" src="{{URL($imagenes->get()[0]->imagen)}}" alt="">
-                            <img id="" onclick="cambiarImagen()" class="h-10 mt-36 ml-3" src="{{URL('img/flecha.png')}}" alt="">
-                            <div class="mt-28 ml-20">
+                            <img id="" onclick="cambiarImagen()" class="h-10 mt-44 ml-3 " src="{{URL('img/flecha.png')}}" alt="">
+                            <div class="mt-28 ml-20 ">
                                                                     <p class="text-2xl">{{ $producto->descripcion }}</p>
                                                                     <p class="text-m mt-10">{{ $producto->precio }} &euro;</p>
 
@@ -37,10 +37,14 @@
                         <div class="grid grid-cols-3 gap-3 w-80">
                             @foreach ($imagenes->get() as $imagen)
                                 <div>
-                                <img class="imgPeque" id="{{$imagen->imagen}}" style="height: 5rem; margin: 1rem; border:1px;" src="{{URL($imagen->imagen)}}" alt="">
+                                <img class="imgPeque" id="{{$imagen->imagen}}" style="height: 5rem; margin-top: 0.5rem; border:1px solid rgb(196, 193, 193);" src="{{URL($imagen->imagen)}}" alt="">
                             </div>
                             @endforeach
                         </div>
+                        @if ($producto->video != null)
+                            <iframe class="mt-20" width="560" height="315" src="{{$producto->video}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+                        @endif
                         </div>
                     </div>
                                 </div>

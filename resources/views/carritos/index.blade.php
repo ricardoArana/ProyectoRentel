@@ -35,7 +35,7 @@
                                     <form action="{{route('vaciar')}}" method="post">
                                         @csrf
                                         @method('POST')
-                                        <button class="bg-red-400 text-black px-7 py-2 rounded-xl" type="submit"> Empty cart</button>
+                                        <button class="hover:bg-orange-500 bg-orange-200 text-black border px-7 py-2 rounded-xl" type="submit"> Empty cart</button>
                                     </form>
                                 </th>
                                 @endif
@@ -45,38 +45,50 @@
     $total = 0;
 @endphp
 
-                                @foreach ($carritos as $carrito)
-                                    <tr>
-                                        <td class="px-6 py-2"><img class="h-60 w-auto" src="{{ URL($carrito->producto->imagenes[0]->imagen) }}" alt="imagen del producto"></td>
-                                        <td class="px-6 py-2">{{ $carrito->producto->nombre }}</td>
-                                        <td class="px-6 py-2">{{ $carrito->cantidad }}</td>
-                                        <td class="px-6 py-2">{{ $carrito->producto->precio * $carrito->cantidad}}&euro;</td>
+@foreach ($carritos as $carrito)
+<tr>
+    <td class="px-6 py-2"><img class="h-60 w-auto" src="{{ URL($carrito->producto->imagenes[0]->imagen) }}" alt="imagen del producto"></td>
+    <td class="px-6 py-2">{{ $carrito->producto->nombre }}</td>
+
+    <td class="px-6 py-2">
+        <div class="text-sm text-gray-900 inline-block">
+            <form action="{{ route('restar', $carrito) }}" method="POST">
+                @csrf
+                @method('POST')
+                <button type="submit" class="px-4 py-1 text-sm border text-black mx-2 hover:bg-orange-500 rounded">-</button>
+            </form>
+        </div>{{ $carrito->cantidad }}
+
+            <div class="text-sm text-gray-900 inline-block">
+                <form action="{{ route('sumar', $carrito) }}" method="POST">
+                    @csrf
+                    @method('POST')
+                    <button type="submit" class="px-4 py-1 border text-sm mx-2 text-black hover:bg-orange-500 rounded">+</button>
+                </form>
+            </div>
+        </td>
+
+        <td>
+
+                                        {{ $carrito->producto->precio * $carrito->cantidad}}&euro;</td>
                                         @php
                                             $total += $carrito->producto->precio * $carrito->cantidad;
                                         @endphp
-                                        <td>
-                                            <div class="text-sm text-gray-900 ">
-                                                <form action="{{ route('restar', $carrito) }}" method="POST">
-                                                    @csrf
-                                                    @method('POST')
-                                                    <button type="submit" class="px-4 py-1 text-sm text-white bg-red-400 rounded">-</button>
-                                                </form>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="text-sm text-gray-900 ">
-                                                <form action="{{ route('sumar', $carrito) }}" method="POST">
-                                                    @csrf
-                                                    @method('POST')
-                                                    <button type="submit" class="px-4 py-1 text-sm text-white bg-red-400 rounded">+</button>
-                                                </form>
-                                            </div>
-                                        </td>
+
                                     </tr>
-                                @endforeach
+                                    @endforeach
+
                             </tbody>
 
                         </table>
+                        <div class="border-t-2 w-3/4 mt-3">
+                            @if ($carritos->isEmpty() == false)
+                            <div class="mt-4 text-right  mr-48">
+
+                                <span class="text-2xl mr-32 font-bold">Amount: </span><span class="font-bold text-xl">{{$total}}&euro;</span>
+                            </div>
+                            @endif
+                        </div>
                         @if ($carritos->isEmpty())
                             @else
                             <div class="mt-5">
@@ -117,6 +129,7 @@
                         </x-plantilla>
                     </div>
                 </div>
+
             </div>
         </div>
 </x-app-layout>

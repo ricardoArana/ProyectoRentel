@@ -87,10 +87,10 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div class="sm:bg-white" :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1 bg-white">
+    <div class="sm:bg-white flex" :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
+        <div class="pt-2 pb-3 space-y-1 bg-white h-auto text-black border">
             <x-responsive-nav-link :href="route('productos')" :active="request()->routeIs('productos')">
-                {{ __('productos') }}
+                {{ __('Products') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('carritos.index')" :active="request()->routeIs('carritos.index')">
                 {{ __('Cart') }}
@@ -98,10 +98,19 @@
             <x-responsive-nav-link :href="route('facturas.index')" :active="request()->routeIs('facturas.index')">
                 {{ __('My orders') }}
             </x-responsive-nav-link>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+
+                <x-responsive-nav-link :href="route('logout')"
+                        onclick="event.preventDefault();
+                                    this.closest('form').submit();">
+                    {{ __('Log Out') }}
+                </x-responsive-nav-link>
+            </form>
         </div>
 
         <!-- Responsive Settings Options -->
-        <div class="pt-4 pb-1 border-t border-gray-200">
+        {{-- <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4">
                 <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
             </div>
@@ -118,6 +127,6 @@
                     </x-responsive-nav-link>
                 </form>
             </div>
-        </div>
+        </div> --}}
     </div>
 </nav>
