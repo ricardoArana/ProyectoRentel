@@ -95,8 +95,8 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-xs-12">
-                                <button class="btn btn-danger btn-lg btn-block" type="submit">Pay Now ({{$total}}&euro;)</button>
+                            <div class="col-xs-12 ml-[190px]">
+                                <button class="bg-orange-600 mt-5 hover:bg-orange-700  px-7 py-3 text-2xl rounded text-white " type="submit">Pay Now ({{$total}}&euro;)</button>
                             </div>
                         </div>
 
@@ -106,19 +106,20 @@
         </div>
     </div>
 </div>
-<div class="grid grid-cols-5 gap-5 w-full px-[30%] items-center">
+<div class=" w-full px-[30%] items-center">
+    <div class="grid grid-cols-5 gap-5 items-center mt-5 border-2 w-full text-2xl">
 @foreach ($carritos as $carrito)
 
-                    <div class="col-span-2 px-6 py-2"><img class="h-60 w-auto" src="{{ URL($carrito->producto->imagenes[0]->imagen) }}" alt="imagen del producto"></div>
+                    <div class="my-5 col-span-2 px-6 py-2"><img class="h-60 w-auto" src="{{ URL($carrito->producto->imagenes[0]->imagen) }}" alt="imagen del producto"></div>
                     <div class="px-6 py-2">{{ $carrito->producto->nombre }}</div>
                     <div class="px-6 py-2">Quantity: {{ $carrito->cantidad }}</div>
                     <div class="px-6 py-2">{{ $carrito->producto->precio * $carrito->cantidad}}&euro;</div>
-                    @php
-                        $total += $carrito->producto->precio * $carrito->cantidad;
-                    @endphp
+
 
             @endforeach
         </div>
+        <p class="font-bold text-4xl text-center mt-5 mb-12">Amount: {{$total}} &euro; <span class="text-blue-700 text-xl">*Taxes included</span></p>
+    </div>
 
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 

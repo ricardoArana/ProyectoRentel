@@ -18,6 +18,16 @@ class DireccionController extends Controller
     {
         return view('direccion'
         );
+
+
+    }
+
+    public function contacto()
+    {
+        return view('contact'
+        );
+
+
     }
 
     /**

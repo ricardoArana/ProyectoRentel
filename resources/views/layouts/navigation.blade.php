@@ -27,9 +27,10 @@
                     <x-nav-link :href="route('facturas.index')" :active="request()->routeIs('facturas.index')">
                         {{ __('My orders') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('completadosUser')" :active="request()->routeIs('completadosUser')">
-                        {{ __('Purchase history') }}
+                    <x-nav-link :href="route('contacto')" :active="request()->routeIs('contacto')">
+                        {{ __('Contact') }}
                     </x-nav-link>
+
                     @endif
                     @if (Auth::user()->rol == "admin")
 
@@ -64,6 +65,9 @@
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 
+                            <x-dropdown-link :href="route('completadosUser')" :active="request()->routeIs('completadosUser')">
+                                {{ __('Purchase history') }}
+                            </x-dropdown-link>
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">

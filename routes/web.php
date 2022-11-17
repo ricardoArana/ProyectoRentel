@@ -4,6 +4,7 @@ use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\DireccionController;
 use App\Http\Controllers\FacturaController;
 use App\Http\Controllers\LineaController;
+use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\PedidoAdminController;
 use App\Http\Controllers\StripeController;
@@ -36,7 +37,13 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/productos', [ProductoController::class, 'index'])->name('productos');
 
+    Route::get('/contacto', [DireccionController::class, 'contacto'])->name('contacto');
 
+    Route::post('/anadircomentario', [ComentarioController::class, 'anadircomentario'])
+        ->name('anadircomentario');
+
+        Route::post('/anadirrespuesta', [ComentarioController::class, 'anadirrespuesta'])
+        ->name('anadirrespuesta');
 
     Route::get('/direccion', [DireccionController::class, 'index'])->name('indexDireccion');
     Route::get('/editDireccion', [DireccionController::class, 'edit'])->name('editDireccion');
