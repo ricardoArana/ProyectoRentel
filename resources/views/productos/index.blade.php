@@ -13,8 +13,24 @@
                         <table class="table-auto">
                             <tbody>
                                 @foreach ($productos as $producto)
-                                    <tr class="border-2 border-grey-700">
-                                        @php
+
+                                @if (count($producto->imagenes) == 0)
+                                @if (Auth::user()->rol == 'admin')
+                                {{$producto->nombre}} No tiene imagen
+
+                                <a href="/productos/{{ $producto->id }}/anadirImagen"
+                                    class="px-4 py-1 text-sm text-white bg-blue-600 rounded">Añadir imagen</a>
+                                    <form action="/productos/{{ $producto->id }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button onclick="return confirm('¿Seguro?')" class="px-4 py-1 mt-5 text-sm text-white bg-red-600 rounded" type="submit">Borrar</button>
+                                    </form>
+                                    @else
+                                    @endif
+
+                                @else
+                                <tr class="border-2 border-grey-700">
+                                    @php
                                         $vermas = false;
                                             $desCorta = substr($producto->descripcion, 0, 70);
                                             if (strlen($producto->descripcion) > 70) {
@@ -28,7 +44,7 @@
                                         <td class="px-6 py-2"><a href="{{route('producto', $producto)}}"> <img class="h-60 w-auto" src="{{ URL($producto->imagenes[0]->imagen) }}" alt="imagen del producto"></a></td>
                                         <td class="px-6 py-2 w-96"><p class="text-3xl mb-4 ">{{ $producto->nombre }}</p>{{ $desCorta }}
                                         @if ($vermas)
-                                            <a href="{{route('producto', $producto)}}"> Ver más </a>
+                                            <a class="font-bold hover:text-orange-700" href="{{route('producto', $producto)}}"> More </a>
                                         @endif
                                     </td>
 
@@ -48,15 +64,22 @@
                                             <a href="/productos/{{ $producto->id }}/edit"
                                                 class="px-4 py-1 text-sm text-white bg-blue-600 rounded">Editar</a>
 
-                                                <form action="/productos/{{ $producto->id }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button onclick="return confirm('¿Seguro?')" class="px-4 py-1 mt-5 text-sm text-white bg-red-600 rounded" type="submit">Borrar</button>
-                                                </form>
-                                                @endif
-                                        </td>
+                                            <p class="mt-5">
+                                                <a href="/productos/{{ $producto->id }}/anadirImagen"
+                                                    class="px-4 py-1 text-sm text-white bg-blue-600 rounded">Añadir imagen</a>
+                                            </p>
+
+
+                                                    <form action="/productos/{{ $producto->id }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button onclick="return confirm('¿Seguro? Borrarás todas las imágenes')" class="px-4 py-1 mt-5 text-sm text-white bg-red-600 rounded" type="submit">Borrar</button>
+                                                    </form>
+                                                    @endif
+                                                </td>
                                     </tr>
 
+                                    @endif
                                 @endforeach
                                 @if (Auth::user()->rol == "admin")
 

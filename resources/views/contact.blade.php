@@ -9,7 +9,7 @@
           <h2 class="text-3xl font-bold mt-6 mb-12">Contact us!</h2>
           <form>
             <div class="form-group mb-6">
-              <input type="text" class="form-control block
+              <input type="text" required class="form-control block
                 w-full
                 px-3
                 py-1.5
@@ -26,7 +26,7 @@
                 placeholder="Name">
             </div>
             <div class="form-group mb-6">
-              <input type="email" class="form-control block
+              <input type="email" required class="form-control block
                 w-full
                 px-3
                 py-1.5
@@ -43,7 +43,7 @@
                 placeholder="Email address">
             </div>
             <div class="form-group mb-6">
-              <textarea class="
+              <textarea required class="
                 form-control
                 block
                 w-full

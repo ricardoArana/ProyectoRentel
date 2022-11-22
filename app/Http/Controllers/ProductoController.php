@@ -47,7 +47,12 @@ class ProductoController extends Controller
      */
     public function store(StoreProductoRequest $request)
     {
-        $validados = $request->validated();
+        $validados = request()->validate([
+            'nombre'=> 'required|string|max:255',
+            'descripcion'=> 'required',
+            'precio'=> 'required',
+            'video'=> 'required',
+        ]);
 
         $producto = new Producto();
         $imagen = new Imagen();
@@ -63,8 +68,10 @@ class ProductoController extends Controller
 
         $producto->descripcion = $validados['descripcion'];
         $producto->precio = $validados['precio'];
+        $producto->video = $validados['video'];
 
         $producto->save();
+        $imagen->producto_id = Producto::whereRaw('id = (select max(id) from productos)')->get()[0]->id;
         $imagen->save();
 
         return redirect('/productos')
@@ -111,12 +118,15 @@ class ProductoController extends Controller
             'nombre'=> 'required|string|max:255',
             'descripcion'=> 'required',
             'precio'=> 'required',
+            'video'=> 'required',
         ]);
 
         $producto = Producto::findOrFail($id);
         $producto->nombre = $validados['nombre'];
         $producto->descripcion = $validados['descripcion'];
         $producto->precio = $validados['precio'];
+        $producto->video = $validados['video'];
+
         $producto->save();
 
         return redirect('/productos')
@@ -129,9 +139,48 @@ class ProductoController extends Controller
      * @param  \App\Models\Producto  $producto
      * @return \Illuminate\Http\Response
      */
+
+    public function setImagen($id)
+    {
+        $producto = Producto::findOrFail($id);
+
+        return view('productos.anadirImagen', [
+            'producto' => $producto,
+        ]);
+    }
+
+    public function postImagen($id){
+
+        $validados = request()->validate([
+            'imagen'=> 'required|mimes:png,jpg,jpeg',
+        ]);
+
+        $validados['imagen']->move(public_path('img'), $validados['imagen']->getClientOriginalName());
+
+        $imagen = New Imagen();
+        $imagen->imagen = "img/" . $validados['imagen']->getClientOriginalName();
+        $imagen->producto_id = $id;
+        $imagen->save();
+
+        return redirect('/productos')
+            ->with('success', 'Imagen añadida correctamente');
+    }
+
     public function destroy($id)
     {
         $producto = Producto::findOrFail($id);
+        $imagenes = count($producto->imagenes);
+        $comentarios = count($producto->comentarios);
+        if ($imagenes > 0) {
+            for ($i=0; $i < $imagenes; $i++) {
+            $producto->imagenes[$i]->delete();
+            }
+        }
+        if ($comentarios > 0) {
+            for ($i=0; $i < $comentarios; $i++) {
+            $producto->comentarios[$i]->delete();
+            }
+        }
         $producto->delete();
 
         return redirect()->back()

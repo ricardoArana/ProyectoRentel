@@ -93,7 +93,13 @@ Route::middleware(['auth', 'can:solo-admin'])->group(function () {
     Route::get('/productos/create', [ProductoController::class, 'create']);
     Route::post('/productos', [ProductoController::class, 'store'])
         ->name('productos.store');
-    Route::get('/productos/{id}/edit', [ProductoController::class, 'edit']);
+
+        Route::get('/productos/{id}/anadirImagen', [ProductoController::class, 'setImagen']);
+
+        Route::post('/producto/{id}', [ProductoController::class, 'postImagen'])
+        ->name('imagen.store');
+
+        Route::get('/productos/{id}/edit', [ProductoController::class, 'edit']);
     Route::delete('/productos/{id}', [ProductoController::class, 'destroy']);
     Route::put('/productos/{id}', [ProductoController::class, 'update'])
         ->name('productos.update');

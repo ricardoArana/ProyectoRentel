@@ -47,7 +47,7 @@
 
 @foreach ($carritos as $carrito)
 <tr>
-    <td class="px-6 py-2"><img class="h-60 w-auto" src="{{ URL($carrito->producto->imagenes[0]->imagen) }}" alt="imagen del producto"></td>
+    <td class="px-6 py-2"><a href="{{route('producto', $carrito->producto)}}"><img class="h-60 w-auto" src="{{ URL($carrito->producto->imagenes[0]->imagen) }}" alt="imagen del producto"></a></td>
     <td class="px-6 py-2">{{ $carrito->producto->nombre }}</td>
 
     <td class="px-6 py-2">
@@ -112,12 +112,52 @@
                             </div>
 <div class="w-full ml-52 text-xl mt-20">
     <p><b> Your address is: </b></p>
-                                                            <p>
-                                                                Street: {{Auth::user()->direccion->calle}} <br>
-                                                                City: {{Auth::user()->direccion->ciudad}} <br>
-                                                                Postal code:{{Auth::user()->direccion->codigo_postal}} <br>
-                                                                Country: {{Auth::user()->direccion->pais}}
-                                                            </p>
+    <div class="flex flex-col">
+        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+            <div class="overflow-hidden">
+              <table class="w-3/4">
+                <thead class="border-b">
+                  <tr>
+                    <th scope="col" class="text-m font-bold text-black px-6 py-4 text-left">
+                        STREET
+                    </th>
+                    <th scope="col" class="text-m font-bold text-black px-6 py-4 text-left">
+                        CITY
+                    </th>
+                    <th scope="col" class="text-m font-bold text-black px-6 py-4 text-left">
+                        POSTAL CODE
+                    </th>
+                    <th scope="col" class="text-m font-bold text-black px-6 py-4 text-left">
+                        COUNTRY
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border-b">
+
+                    <td class="text-base text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        {{Auth::user()->direccion->calle}}
+                    </td>
+                    <td class="text-base text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        {{Auth::user()->direccion->ciudad}}
+                    </td>
+                    <td class="text-base text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        {{Auth::user()->direccion->codigo_postal}}
+                    </td>
+                    <td class="text-base text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        {{Auth::user()->direccion->pais}}
+                    </td>
+                  </tr>
+
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
                                                             <form action="{{route('editDireccion', Auth::user()->direccion)}}" method="get">
                                                                 @csrf
                                                                 @method('GET')

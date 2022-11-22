@@ -19,7 +19,7 @@
                                 <img id="" onclick="cambiarImagenAnterior()"
                                     class="h-10 mt-44 mr-3 cursor-pointer" src="{{ URL('img/anterior.png') }}"
                                     alt="">
-                                <img id="imgGrande" class="h-96 border" src="{{ URL($imagenes->get()[0]->imagen) }}"
+                                <img id="imgGrande" class="w-96 h-auto border" src="{{ URL($imagenes->get()[0]->imagen) }}"
                                     alt="">
                                 <img id="" onclick="cambiarImagen()" class="h-10 mt-44 ml-3 cursor-pointer"
                                     src="{{ URL('img/proximo.png') }}" alt="">
@@ -50,8 +50,8 @@
                             </div>
 
                         </div>
+                        @if ($producto->video != null)
                         <div class="flex bg-black w-full h-auto my-10 py-20 items-center justify-center">
-                            @if ($producto->video != null)
 
                                 <iframe class="" width="560" height="315" src="{{ $producto->video }}"
                                     title="YouTube video player" frameborder="0"
@@ -59,8 +59,8 @@
                                     allowfullscreen></iframe>
 
 
+                                </div>
                             @endif
-                                                </div>
                         <h3 class="mb-4 mt-10 text-lg font-semibold text-gray-900">Comments</h3>
                         <div class="flex items-center justify-center shadow-lg mt-10 mb-4 w-11/12">
                         <form class="w-3/4" action="{{ route('anadircomentario') }}" method="POST">
@@ -99,7 +99,15 @@
                         </div>
                         <div class="flex-1 border rounded-lg px-4 py-2 sm:px-6 sm:py-4 leading-relaxed ">
 
-                            <strong>{{$comentario->user->name}}</strong> <span class="text-xs text-gray-400">{{$fecha[0]}}</span>
+                            <strong>{{$comentario->user->name}}</strong> <span class="text-xs ml-2 text-gray-400">
+                                {{$fecha[0]}}
+                            </span>
+                            @if ($comentario->user->name == "admin")
+
+                            <span class="text-xs ml-2 text-blue-700">
+                                Admin
+                            </span>
+                            @endif
                             <div class="flex">
                           <p class="text-sm w-3/4 inline-block">
                             {{$comentario->texto}}
@@ -127,7 +135,13 @@
        @foreach($comentario->respuestas as $respuesta)
            <div class="flex mt-6">
             <div class="flex-1 bg-gray-100 rounded-lg px-4 py-2 sm:px-6 sm:py-4 leading-relaxed">
-              <strong>{{$respuesta->user->name}}</strong> <span class="text-xs text-gray-400">{{$fecha[0]}}</span>
+              <strong>{{$respuesta->user->name}}</strong> <span class="text-xs ml-2 text-gray-400">{{$fecha[0]}}</span>
+              @if ($respuesta->user->rol == "admin")
+
+              <span class="text-xs ml-2 text-blue-700">
+                  Admin
+              </span>
+              @endif
               <p class="text-xs sm:text-sm">
                 {{$respuesta->texto}}
               </p>
@@ -187,19 +201,16 @@
 
         function cambiarImagenAnterior() {
 
-            if (cont < 0) {
+            if (cont <= 0) {
                 cont = imgPeque.length - 1;
-                imgGrande.src = imgPeque[cont].src
+                imgGrande.src = imgPeque[imgPeque.length - 1].src
             } else {
-                if (cont == 0) {
-                    imgGrande.src = imgPeque[cont].src
-                } else {
+
                     --cont
                     imgGrande.src = imgPeque[cont].src
                 }
-                --cont
             }
-        }
+
 
 
 
